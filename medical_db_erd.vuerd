@@ -18,7 +18,7 @@
       "relationship": true
     },
     "database": "MySQL",
-    "databaseName": "",
+    "databaseName": "medical_db",
     "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
