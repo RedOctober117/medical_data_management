@@ -4,7 +4,6 @@ CREATE DATABASE IF NOT EXISTS medical_db;
 
 USE medical_db;
 
-
 CREATE TABLE medical_report_provider (
     provider_id         INT             AUTO_INCREMENT,
     provider_name       VARCHAR(400),
@@ -159,14 +158,6 @@ INSERT INTO provider_contact_position_classification (classification_name) VALUE
     ("Nephrologist"),
     ("Nurse Practicioner");
 
--- INSERT INTO medical_report_provider (provider_name) VALUES
---     ("Lyerly");
-
--- INSERT INTO medical_report (report_date, report_provider) VALUES
---     ("2023-9-28", 1);
-
--- INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement) VALUES
---     (1, 1, 1, 3.37);
 
 INSERT INTO medical_report (report_date, report_provider, report_type) VALUES
     ("2021-06-16", 2, 5);
@@ -174,7 +165,15 @@ INSERT INTO medical_report (report_date, report_provider, report_type) VALUES
 INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement) VALUES
     (1, 1, 1, 96);
 
--- TEST QUERY
+-- INSERT INTO medical_report (report_date, report_provider) VALUES
+--     ("2023-9-28", 1);
+
+-- INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement) VALUES
+--     (1, 1, 1, 3.37);
+
+
+
+-- TEST QUERY FOR PARITY WITH LAB REPORTS
 
 -- SELECT 
 -- 	mrd.report_id,
