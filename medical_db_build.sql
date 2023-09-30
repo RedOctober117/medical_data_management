@@ -95,9 +95,8 @@ CREATE TABLE medical_report_line_item (
 -- TEST DATA
 
 INSERT INTO medical_report_provider (provider_name) VALUES
-    ("Nephrology Associates"),
-    ("Creekside Medical Clinic");
-
+    ("Test Provider 1"),
+    ("Test Provider 2");
 
 INSERT INTO medical_report_type (report_type_name) VALUES
     ("Renal Function Panel"),
@@ -115,7 +114,6 @@ INSERT INTO medical_report_line_item_unit (value_unit_full_name, value_unit_desc
     ("Million Cells per Cubic Milimeter", "", "M/cubic mm"), -- https://www.cdc.gov/cliac/docs/addenda/cliac0313/13A_CLIAC_2013March_UnitsOfMeasure.pdf
     ("Percentage", "", "%"),
     ("Picograms", "", "pg");
-
 
 INSERT INTO medical_report_line_item_classification (value_type_name, value_type_abbreviation) VALUES
     ("Albumin", "ALB"),
