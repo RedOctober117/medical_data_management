@@ -4,7 +4,7 @@ use std::io::Write;
 fn main() {
     loop {
         let exit_condition = String::from("Q");
-        let user_input = query_user("Welcome to the medical_db query builder. To begin, select the query you'd like to build.\n1. medical_report_line_item\n2. medical_report\n : ");
+        let user_input = query_user("Welcome to the medical_db query builder. To begin, select the query you'd like to build.\n1. medical_report_line_item\n2. medical_report\n3. medical_report_type\n : ");
         // Trim user_input to drop the new line character at the end
         if user_input.trim().to_uppercase().eq(&exit_condition) {
             break;
@@ -13,6 +13,7 @@ fn main() {
             match user_selection {
                 1 => println!("{}", line_item_builder()),
                 2 => println!("{}", medical_report_builder()),
+                3 => println!("{}", medical_report_type()),
                 i32::MIN..=0_i32 | 3_i32..=i32::MAX => todo!(),
             };
         }
@@ -35,6 +36,12 @@ fn medical_report_builder() -> String {
     let report_type: i32 = parse_user_query(query_user("Report Type: "));
 
     format!("INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement VALUES\n\t(\"{report_date}\"),\n\t({report_provider}),\n\t({report_type});\n\n")
+}
+
+fn medical_report_type() -> String {
+    let report_type_name = query_user("Report Type Name: ").trim().to_string();
+
+    format!("INSERT INTO medical_report_type (report_type_name) VALUES\n\t(\"{report_type_name}\");")
 }
 
 fn query_user(message: &str) -> String {
