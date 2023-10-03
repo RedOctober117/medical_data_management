@@ -4,7 +4,7 @@ use std::io::Write;
 fn main() {
     loop {
         let exit_condition = String::from("Q");
-        let user_input = query_user("Welcome to the medical_db query builder. To begin, select the query you'd like to build.\n1. medical_report_line_item\n2. medical_report\n3. medical_report_type\n : ");
+        let user_input = query_user("Welcome to the medical_db query builder. To begin, select the query you'd like to build. To exit, press \"Q\".\n1. medical_report_line_item\n2. medical_report\n3. medical_report_type\n : ");
         // Trim user_input to drop the new line character at the end
         if user_input.trim().to_uppercase().eq(&exit_condition) {
             break;
@@ -22,12 +22,22 @@ fn main() {
 }
 
 fn line_item_builder() -> String {
-    let report_id: i32 = parse_user_query(query_user("Report ID: "));
-    let value_type: i32 = parse_user_query(query_user("Value Type: "));
-    let value_unit: i32 = parse_user_query(query_user("Value Unit: "));
-    let value_measurement: i32 = parse_user_query(query_user("Value Measurement: "));
-
-    format!("INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement VALUES\n\t({report_id}),\n\t({value_type}),\n\t({value_unit}),\n\t({value_measurement});\n\n")
+    let mut query = String::from("INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement VALUES");
+    let exit_condition: String = String::from("Y");
+    loop {
+        if query_user("Done? (y/N) ").trim().to_uppercase().eq(&exit_condition) {
+            break;
+        }
+        let report_id: i32 = parse_user_query(query_user("Report ID: "));
+        let value_type: i32 = parse_user_query(query_user("Value Type: "));
+        let value_unit: i32 = parse_user_query(query_user("Value Unit: "));
+        let value_measurement: f64 = parse_user_query(query_user("Value Measurement: "));
+        query = format!("{query}\n\t({report_id}, {value_type}, {value_unit}, {value_measurement}),");
+    }
+    query.pop();
+    query.push(';');
+    query
+    // format!("INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement VALUES\n\t({report_id}),\n\t({value_type}),\n\t({value_unit}),\n\t({value_measurement});\n\n")
 }
 
 fn medical_report_builder() -> String {
@@ -57,8 +67,8 @@ fn query_user(message: &str) -> String {
     user_input
 }
 
-fn parse_user_query(input: String) -> i32 {
-    let mut internal_input = input;
+fn parse_user_query<T: std::str::FromStr>(input: String) -> T {
+    let mut internal_input: String = input;
     // let output: Result<i32, _> = input.trim().parse();
     loop {
         let _output = match internal_input.trim().parse() {
