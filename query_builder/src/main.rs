@@ -37,7 +37,6 @@ fn line_item_builder() -> String {
     query.pop();
     query.push(';');
     query
-    // format!("INSERT INTO medical_report_line_item (report_id, value_type, value_unit, value_measurement VALUES\n\t({report_id}),\n\t({value_type}),\n\t({value_unit}),\n\t({value_measurement});\n\n")
 }
 
 fn medical_report_builder() -> String {
