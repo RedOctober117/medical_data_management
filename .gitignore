@@ -1,3 +1,4 @@
 egfr_calculator/target/*
 query_builder/target/*
+database_interface/target/*
 confidential_inserts.sql
