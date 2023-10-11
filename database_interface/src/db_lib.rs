@@ -2,7 +2,7 @@ pub mod db_lib {
     use sqlx::types::chrono::NaiveDateTime;
 
     pub struct MedicalReportProvider {
-        pub provider_id: i32,
+        pub provider_id: Option<i32>,
         pub provider_name: Option<String>,
     }
     
@@ -71,7 +71,7 @@ pub mod db_lib {
     impl std::fmt::Display for MedicalReportProvider {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
             write!(f, "(provider_id: {}, provider_name: {})", 
-                        self.provider_id, self.provider_name.clone().unwrap())
+                        self.provider_id.unwrap(), self.provider_name.clone().unwrap())
         }
     }
     
